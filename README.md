@@ -1,2 +1,2 @@
 # react-news-app
-News combination from different sources 
+News aggregator from different sources 
