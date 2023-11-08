@@ -1,0 +1,49 @@
+.filterWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    margin-bottom: 30px;
+
+    @media only screen and (max-width: 768px) {
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+
+    &_item {
+        margin-right: 20px;
+
+        @media only screen and (max-width: 768px) {
+            margin-right: 0;
+            margin-bottom: 10px;
+            width: 200px;
+        }
+
+        &_selectbox {
+            padding: 10px;
+            border-radius: 8px;
+
+            @media only screen and (max-width: 768px) {
+                width: 100%;
+            }
+        }
+
+        &_byDate {
+            @media only screen and (max-width: 768px) {
+                width: 100%;
+            }
+
+            .react-date-picker__wrapper {
+                border-color: #fff;
+                height: 39px;
+                border-radius: 8px;
+
+                input {
+                    &::placeholder {
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}
