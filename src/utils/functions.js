@@ -1,6 +1,6 @@
 
-export const fetchAllSourceData = async (keyword='') => {
-    const newsApiEndpoint = `https://newsapi.org/v2/everything?q=${keyword}&apiKey=0d728f5416e54ea291be295679d4ac3c`;
+export const fetchAllSourceData = async (keyword = '') => {
+    const newsApiEndpoint = `https://newsapi.org/v2/everything?q=${keyword ? keyword : 'keyword'}&apiKey=0d728f5416e54ea291be295679d4ac3c`;
     const nyTimesApiEndpoint = `https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${keyword}&api-key=SDUKwYTwMwK3nvn3ug9rfsKIDx74udhE`;
     const guardianApiEndpoint = `https://content.guardianapis.com/search?q=${keyword}&api-key=1fc379ea-9faa-4df3-a34c-73f748e66ae7`;
     try {
@@ -53,9 +53,32 @@ export const formatDate = (data = '') => {
     return formattedDate;
 }
 
-export const filterNewsByKeyword = (newsArray, keyword) => {
+export const filterNewsByKey = (newsArray, targetKey, keyword) => {
     const filteredNews = newsArray.filter(newsItem => {
-        return newsItem.keyword.toLowerCase().includes(keyword.toLowerCase());
+        return newsItem[targetKey]?.toLowerCase() === keyword?.toLowerCase();
     });
     return filteredNews;
+}
+
+export const filterDataByDate = (data, targetDate) => {
+    if (typeof targetDate === 'string') {
+        targetDate = new Date(targetDate);
+    }
+    const filteredData = data.filter(item => {
+        const itemDate = new Date(item.publishDate);
+        return itemDate.toDateString() === targetDate.toDateString();
+    });
+    return filteredData;
+}
+
+export const getUniqueArray = (array, key) => {
+    var map = new Map();
+    let uniqueObjects = array.filter((obj) => {
+        if (map.get(obj[key])) {
+            return false;
+        }
+        map.set(obj[key], obj);
+        return true;
+    });
+    return uniqueObjects
 }

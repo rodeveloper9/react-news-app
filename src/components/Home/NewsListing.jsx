@@ -2,15 +2,15 @@ import NewsCard from "./NewsCard";
 import "./styles/_newsListing.scss"
 
 const NewsListing = (props) => {
-    const { listingData = [] } = props;
+    const { listingData = [], isDataFound } = props;
     return (
-        listingData?.length > 0 ?
+        (listingData?.length > 0 && isDataFound) ?
             <div className="newsListing">
                 {listingData.map((data, index) => {
-                    return <NewsCard cardData={data} index={index} />
+                    return <NewsCard cardData={data} key={index} />
                 })}
             </div>
-            : 'Not Found'
+            : 'No Data Found'
     )
 }
 
